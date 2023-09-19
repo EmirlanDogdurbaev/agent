@@ -56,7 +56,9 @@ class Producer(User):
     type_products = models.CharField(max_length=20, choices=TYPE_PRODUCTS)
 
 
-class Store_Owner(User):
+class StoreOwner(User):
     # just owns a store, can't order but can see orders
     tin = models.CharField(max_length=255)
     phone = models.CharField(max_length=50)
+
+

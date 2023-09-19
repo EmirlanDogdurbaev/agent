@@ -14,38 +14,26 @@ class OrderListCreateAPIView(ListCreateAPIView):
     # permission to check if user is authenticated
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class OrderUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
     # permission to check if user is authenticated
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    # permission_classes = [permissions.IsAuthenticated]
-# class OrderListView(APIView):
-#     # add permission to check if user is authenticated
-#     permission_classes = [permissions.IsAuthenticated]
-#
-#         def get(self, request, *args, **kwargs):
-#         """
-#         List all the device items for given requested user
-#         """
-#         driver = acc_models.Driver.objects.get(user_id=request.user.id)
-#         devices = Device.objects.filter(user=driver.id)
-#         serializer = DeviceSerializer(devices, many=True)
-#         return Response(serializer.data, status=status.HTTP_200_OK)
-#
-#     def post(self, request, *args, **kwargs):
-#         """
-#         Create the device with given url data
-#         """
-#         data = request.data
-#         driver = acc_models.Driver.objects.get(user_id=request.user.id)
-#         data.update({"user": driver.id})
-#         serializer = DeviceSerializer(data=data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class ProductListCreateAPIView(ListCreateAPIView):
+    # permission to check if user is authenticated
+    queryset = Product.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class ProductUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
+    # permission to check if user is authenticated
+    queryset = Product.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
