@@ -13,13 +13,14 @@ ROLE_CHOICES = [
     (STORE_MANAGER, 'Store Manager'),
 ]
 
+
 class User(AbstractUser):
+    # User is Store Shop or Mall MANAGER who orders goods
 
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
     name = models.CharField(max_length=150)
     role = models.CharField(choices=ROLE_CHOICES, default=ROLE_CHOICES[2], max_length=150)
-
 
 
     groups = models.ManyToManyField(
@@ -41,19 +42,21 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
-class Company(User):
-    adress = models.CharField(max_length=150)
+
+class Producer(User):
+    address = models.CharField(max_length=150)
     tin = models.CharField(max_length=255)
     FOOD = "Food"
-    HAUSEHOLD = "Hausehold"
+    HOUSEHOLD = "Household"
 
     TYPE_PRODUCTS = [
         (FOOD, "Food"),
-        (HAUSEHOLD, "Hausehold")
+        (HOUSEHOLD, "Household")
     ]
     type_products = models.CharField(max_length=20, choices=TYPE_PRODUCTS)
 
+
 class Store_Owner(User):
+    # just owns a store, can't order but can see orders
     tin = models.CharField(max_length=255)
     phone = models.CharField(max_length=50)
-

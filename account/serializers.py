@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import User, Company, Store_Owner
+from .models import User, Producer, Store_Owner
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,21 +19,21 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-class CompanySerializer(serializers.ModelSerializer):
+class ProducerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Company
-        fields = ['id', 'username', "name", 'email', "adress", "tin", "type_products", 'password', 'role']
+        model = Producer
+        fields = ['id', 'username', "name", 'email', "address", "tin", "type_products", 'password', 'role']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        company = Company(
+        company = Producer(
             username=validated_data['username'],
             name=validated_data['name'],
             email=validated_data['email'],
             role=validated_data['role'],
-            adress = validated_data['adress'],
-            tin = validated_data['tin'],
-            type_products = validated_data['type_products'],
+            adress=validated_data['adress'],
+            tin=validated_data['tin'],
+            type_products=validated_data['type_products'],
         )
         company.set_password(validated_data['password'])
         company.save()

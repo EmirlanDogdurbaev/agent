@@ -3,12 +3,13 @@ from rest_framework.response import Response
 from rest_framework_jwt.settings import api_settings
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .models import User, Company
-from .serializers import UserSerializer, CompanySerializer
+from .models import User, Producer
+from .serializers import UserSerializer, ProducerSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
 jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
 
 class RegistrationAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -20,6 +21,7 @@ class RegistrationAPIView(generics.CreateAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         return Response({'message': 'User registered successfully'})
+
 
 class UserLoginAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -44,13 +46,13 @@ class UserLoginAPIView(generics.CreateAPIView):
         return Response({'access_token': access_token})
 
 
-class RegistrationCompanyAPIView(generics.CreateAPIView):
-    queryset = Company.objects.all()
-    serializer_class = CompanySerializer
+class RegistrationProducerAPIView(generics.CreateAPIView):
+    queryset = Producer.objects.all()
+    serializer_class = ProducerSerializer
     permission_classes = (permissions.AllowAny,)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        comoany = serializer.save()
+        producer = serializer.save()
         return Response({'message': 'User registered successfully'})
