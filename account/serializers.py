@@ -31,7 +31,7 @@ class ProducerSerializer(serializers.ModelSerializer):
             name=validated_data['name'],
             email=validated_data['email'],
             role=validated_data['role'],
-            adress=validated_data['adress'],
+            address=validated_data['address'],
             tin=validated_data['tin'],
             type_products=validated_data['type_products'],
         )

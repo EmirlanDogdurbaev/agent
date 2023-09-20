@@ -1,13 +1,14 @@
 from django.shortcuts import render
-from rest_framework import permissions
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.views import APIView
 from rest_framework import permissions, status
+from rest_framework.generics import (ListCreateAPIView,
+                                     RetrieveUpdateDestroyAPIView)
 from rest_framework.response import Response
-from account import models as acc_models
-from .models import Order, Product
+from rest_framework.views import APIView
 
-from .serializers import ProductSerializer, OrderSerializer
+from account import models as acc_models
+
+from .models import Order, Product
+from .serializers import OrderSerializer, ProductSerializer
 
 
 class OrderListCreateAPIView(ListCreateAPIView):
@@ -36,4 +37,3 @@ class ProductUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = OrderSerializer
     permission_classes = [permissions.IsAuthenticated]
-

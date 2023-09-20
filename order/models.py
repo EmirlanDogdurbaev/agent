@@ -33,6 +33,6 @@ class Order(models.Model):
     supplier = models.ForeignKey(Producer, on_delete=models.CASCADE, related_name='supplied_orders')
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_orders')
     order_date = models.DateTimeField(auto_now_add=True)
-    confirm_date = models.DateTimeField(default=None)
-    receiving_date = models.DateTimeField(default=None)
+    confirm_date = models.DateTimeField(default=None, null=True)
+    receiving_date = models.DateTimeField(default=None, null=True)
     delivery_status = models.CharField(choices=DELIVERY_STATUS, max_length=100)
